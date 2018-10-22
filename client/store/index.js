@@ -4,19 +4,22 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-  studentForm: {
-    id: 0,
-    name: '',
-    surname: '',
-    birthdate: '',
-    group: '',
-    isSelected: false,
-  },
+  maxId: 0,
+  isEdit: false,
+  studentForm: { isSelected: false },
   students: [],
 };
 const mutations = {
-  addStudent({ students }, payload) {
-    students.push(payload);
+  addStudent(state, payload) {
+    state.maxId++;
+    state.students.push({...payload, id: state.maxId });
+    state.studentForm = { isSelected: false };
+  },
+  updateStudent(state, payload) {
+    state.isEdit = false;
+    state.studentForm = { isSelected: false };
+    const index = state.students.findIndex(item => item.id === payload.id);
+    if (index !== -1) Vue.set(state.students, index, payload);;
   },
   selectStudent({ students }, payload) {
     const idx = students.findIndex(item => item.id === payload);
@@ -29,8 +32,9 @@ const mutations = {
       }
     }
   },
-  editStudent({ studentForm }, payload) {
-    return {...studentForm, ...payload };
+  editStudent(state, payload) {
+    state.isEdit = true;
+    state.studentForm = { ...state.studentForm, ...payload };
   }
 };
 const actions   = { };

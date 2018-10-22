@@ -5,4 +5,3 @@
 </template>
 
 <style src='styles/main.scss'>
-
