@@ -2,7 +2,7 @@
 const pkg = require('../package')
 
 module.exports = {
-  title: 'defa-vue-starter',
+  title: 'defa test task',
   // Options for webpack-dev-server
   // See https://webpack.js.org/configuration/dev-server
   devServer: {

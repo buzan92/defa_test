@@ -2,10 +2,9 @@
   <div class="page">
     <button v-if="$store.state.isEdit" @click="toggleModal" class="js-toggle">Изменить</button>
     <button v-if="!$store.state.isEdit" @click="toggleModal" class="js-toggle">Добавить</button>
-    <StudentsTable
-      :students="students" />
+    <StudentsTable />
     <div
-      v-if="isShowForm"
+      v-if="$store.state.isFormShow"
       @click="toggleModal($event)"
       class="student-modal js-toggle">
       <div class="student-modal__content">
@@ -24,12 +23,7 @@ import StudentsForm from '../../components/StudentsForm';
 
 export default {
   data() {
-    const { state } = this.$store;
-    return {
-      isShowForm: false,
-      isUpdate: false,
-      students: state.students,
-    };
+    return {};
   },
   components: {
     StudentsTable,
@@ -41,7 +35,8 @@ export default {
       e.stopPropagation();
       const { className } = e.target;
       if (className.indexOf('js-toggle') !== -1) {
-        this.isShowForm = !this.isShowForm;
+        this.$store.commit('showForm', !this.$store.state.isFormShow);
+        //this.isShowForm = !this.isShowForm;
       }
     }
   },

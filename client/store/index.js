@@ -6,6 +6,7 @@ Vue.use(Vuex);
 const state = {
   maxId: 0,
   isEdit: false,
+  isFormShow: false,
   studentForm: { isSelected: false },
   students: [],
 };
@@ -35,7 +36,10 @@ const mutations = {
   editStudent(state, payload) {
     state.isEdit = true;
     state.studentForm = { ...state.studentForm, ...payload };
-  }
+  },
+  showForm(state, payload) {
+    state.isFormShow = payload;
+  },
 };
 const actions   = { };
 

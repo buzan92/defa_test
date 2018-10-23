@@ -47,7 +47,7 @@
       <div class="table__row--item">{{calcAge(student.birthdate)}}</div>
       <div class="table__row--item">{{student.group}}</div>
       <div class="table__row--item">
-        <button @click="editRow(student)">Изменить</button>
+        <button @click="editRow($event, student)">Изменить</button>
       </div>
     </div>
     </transition-group>
@@ -109,8 +109,9 @@ export default {
       }
       this.$store.commit('selectStudent', id);
     },
-    editRow(student) {
+    editRow(e, student) {
       this.$store.commit('editStudent', student);
+      this.$store.commit('showForm', true);
     },
     removeStudents() {
       this.$store.commit('removeStudents');
